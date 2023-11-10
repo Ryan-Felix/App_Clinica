@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 12,
     textAlign: 'center',
-    width: cellWidth, // Alterado para usar a mesma largura das células
+    width: cellWidth,
   },
 });
 
