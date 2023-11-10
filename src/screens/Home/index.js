@@ -7,11 +7,11 @@ export default function HomePaciente({ navigation }) {
   };
 
   const GetP = () => {
-    navigation.navigate('GetP'); // Substitua 'Another_Screen' pelo nome da tela para a qual você deseja navegar
+    navigation.navigate('GetP'); 
   };
 
   const Delete = () => {
-    navigation.navigate('Delete'); // Substitua 'Different_Screen' pelo nome da tela para a qual você deseja navegar
+    navigation.navigate('Delete'); 
   };
 
   return (
