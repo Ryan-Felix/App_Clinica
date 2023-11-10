@@ -22,7 +22,7 @@ export default function HomePaciente({ navigation }) {
         style={styles.image}
       />
 
-      {/* Botão para navegar para a tela 'HomeP' */}
+      {/* Botão para navegar para a tela 'Home do Paciente' */}
       <TouchableOpacity style={styles.button} onPress={HomeP}>
         <Text style={styles.buttonText}>Paciente</Text>
       </TouchableOpacity>
@@ -32,7 +32,7 @@ export default function HomePaciente({ navigation }) {
         <Text style={styles.buttonText}>Em breve</Text>
       </TouchableOpacity>
 
-      {/* Botão para navegar para uma tela diferente */}
+      {/* Botão para navegar para uma tela*/}
       <TouchableOpacity style={styles.button} onPress={""}>
         <Text style={styles.buttonText}>????</Text>
       </TouchableOpacity>
