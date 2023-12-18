@@ -9,45 +9,40 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    
+
   },
   table: {
+    
     borderWidth: 1,
     borderColor: '#000',
-    width: '90%',
     borderRadius: 10,
     marginTop: 20,
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-    elevation: 5,
+    backgroundColor: '#fff', 
+   
   },
   row: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'space-around', 
     borderBottomWidth: 1,
     borderColor: '#000',
+    
   },
   cell: {
     borderWidth: 1,
+    borderRightWidth: 0, 
     padding: 10,
     flex: 1,
-    backgroundColor: 'lightgrey',
     alignItems: 'center',
     justifyContent: 'center',
-    width: cellWidth,
   },
   header: {
-    flex: 4,
-    backgroundColor: 'lightgrey',
+    flex: 1,
+    backgroundColor: '#2c3e50',
+    color: '#ffffff',
     fontWeight: 'bold',
     fontSize: 12,
     textAlign: 'center',
-    width: cellWidth,
+
   },
 });
 
