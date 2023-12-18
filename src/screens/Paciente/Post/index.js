@@ -1,102 +1,77 @@
-import React from 'react';
-import { useRoute } from '@react-navigation/native';
-import Input from '../../../components/InputBar';
-import { Text, View, Image, TouchableOpacity } from 'react-native';
-import { FontAwesome } from '@expo/vector-icons';
+import React, { useState } from 'react';
 import styles from './style';
+import { View, Text, Button, TextInput } from 'react-native';
+import { useRoute } from '@react-navigation/native';
 
 
-export default function Telas({ navigation }) {
-
+const PostP = ({ navigation }) => {
+  const routes = useRoute();
   const GetP = () => {
     navigation.navigate('GetP');
   };
+  const [nome, setNome] = useState('');
+  const [telefone, setTelefone] = useState('');
+  const [endereco, setEndereco] = useState('');
+  const [remedio, setRemedio] = useState('');
+  const [doencas, setDoencas] = useState('');
 
-  const PutP = () => {
-    navigation.navigate('PutP');
+  const handleAddPaciente = async () => {
+    try {
+      const response = await fetch('http://etec199-2021-robsondias.atwebpages.com/SW/clinicaPHP/insert/insert.php', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          nome,
+          telefone,
+          endereco,
+          remedio,
+          doencas,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (data.erro) {
+        console.error('Erro ao adicionar paciente:', data.erro);
+      } else {
+        console.log('Paciente adicionado com sucesso. ID Inserido:', data.idInserido);
+        // Limpe os campos após a adição bem-sucedida, se necessário
+        setNome('');
+        setTelefone('');
+        setEndereco('');
+        setRemedio('');
+        setDoencas('');
+
+        GetP();
+      
+      }
+    } catch (error) {
+      console.error('Erro ao enviar solicitação para adicionar paciente:', error);
+    }
   };
 
-  const DeleteP = () => {
-    navigation.navigate('DeleteP');
-  };
-
-
-  const routes = useRoute();
   return (
     <View style={styles.container}>
+      <Text style={styles.text}>Nome:</Text>
+      <TextInput style={styles.input} value={nome} onChangeText={setNome} />
 
-      <Image
-        source={require('../../../Img/Paciente1.png')}
-        style={styles.imagem}
-      />
+      <Text style={styles.text}>Telefone:</Text>
+      <TextInput style={styles.input} value={telefone} onChangeText={setTelefone} />
 
-      <View style={styles.inputDiv}>
-        <Text style={styles.text}>Nº Beneficiário:</Text>
-        <Input style={styles.input} />
-      </View>
-      <View style={styles.inputDiv}>
-        <Text style={styles.text}>Nome:</Text>
-        <Input style={styles.input} />
-      </View>
-      <View style={styles.inputDiv}>
-        <Text style={styles.text}>Telefone:</Text>
-        <Input style={styles.input} />
-      </View>
+      <Text style={styles.text}>Endereço:</Text>
+      <TextInput style={styles.input} value={endereco} onChangeText={setEndereco} />
 
+      <Text style={styles.text}>Remédio:</Text>
+      <TextInput style={styles.input} value={remedio} onChangeText={setRemedio} />
 
-      <View style={styles.inputDiv}>
-        <Text style={styles.text}>Endereço:</Text>
-        <Input style={styles.input} />
-      </View>
-      <View style={styles.inputDiv}>
-        <Text style={styles.text}>Remédio de Uso Contínuo:</Text>
-        <Input style={styles.input} />
-      </View>
-      <View style={styles.inputDiv}>
-        <Text style={styles.text}>Doenças Prévias:</Text>
-        <Input style={styles.input} />
-      </View>
+      <Text style={styles.text}>Doenças:</Text>
+      <TextInput style={styles.input} value={doencas} onChangeText={setDoencas} />
 
-
-      <TouchableOpacity style={styles.sendButton} onPress={''}>
-          <Text style={styles.sendButtonText}>Enviar</Text>
-        </TouchableOpacity>
-
-
-
-      <View style={styles.row}>
-        <TouchableOpacity style={styles.square} onPress={GetP}>
-          <View>
-            <FontAwesome name="arrow-circle-up" size={30} color="white" />
-          </View>
-        </TouchableOpacity>
-        <TouchableOpacity style={[styles.square, styles.ActButton]}>
-          <View>
-            <FontAwesome name="plus" size={30} color="white" />
-          </View>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.square} onPress={PutP}>
-          <View>
-            <FontAwesome name="pencil" size={30} color="white" />
-          </View>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.square} onPress={DeleteP}>
-          <View>
-            <FontAwesome name="trash" size={30} color="white" />
-          </View>
-        </TouchableOpacity>
-
-        <TouchableOpacity style={styles.square} >
-          <View>
-            <FontAwesome name="undo" size={30} color="white" />
-          </View>
-        </TouchableOpacity>
-
-        
-
-
-      </View>
+      <Button title="Adicionar Paciente" onPress={handleAddPaciente} />
     </View>
   );
-}
+};
 
+export default PostP;
